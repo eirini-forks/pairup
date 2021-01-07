@@ -10,15 +10,15 @@ function render(board) {
 }
 
 switch(window.location.hash) {
-  case "#eirini":
-    render("eirini")
+  case "#garden":
+    render("garden")
     break;
   case "#scratch":
     render("scratch")
     break;
-  case "#garden":
+  case "#eirini":
   default:
     console.log(window.location.hash)
-    render("garden")
+    render("eirini")
     break;
 }
