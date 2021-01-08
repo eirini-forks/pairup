@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App";
+import AppWrapper from "./AppWrapper";
 
 function render(board) {
   ReactDOM.render(
-    <App boardName={board} enableFirebase={true} />,
+    <AppWrapper boardName={board} enableFirebase={true} />,
     document.getElementById("root")
   );
 }

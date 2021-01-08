@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 import styled from "styled-components";
 import { injectGlobal } from "styled-components";
+import firebase from "firebase";
 
 import {
   Random as RandomIcon,
@@ -10,6 +11,7 @@ import {
 } from "styled-icons/fa-solid";
 import { DeleteSweep as ClearIcon } from "styled-icons/material";
 import { Settings as SettingsIcon } from "styled-icons/feather/Settings";
+import { LogOut as LogOutIcon } from "styled-icons/feather/LogOut";
 import { CalendarTimes as CalendarOutIcon } from "styled-icons/fa-regular/CalendarTimes";
 
 import Card from "./Card";
@@ -62,6 +64,12 @@ const PageControls = styled.div`
   right: ${bs(2)};
   display: grid;
   grid-template-rows: ${bs(2)} ${bs(2)};
+`;
+
+const LogOutButton = LogOutIcon.extend`
+  width: ${bs(1)};
+  height: ${bs(1)};
+  cursor: pointer;
 `;
 
 const SettingsButton = SettingsIcon.extend`
@@ -185,6 +193,10 @@ export default class Board extends React.Component {
     this.state = { settingsOpen: false, editingPeople: false };
   }
 
+  logOut = () => {
+      firebase.auth().signOut();
+  };
+
   render() {
     return (
       <DragDropContext
@@ -200,6 +212,9 @@ export default class Board extends React.Component {
             }}
           >
             <PageControls>
+              {!this.state.settingsOpen && (
+              <LogOutButton title="log out" onClick={this.logOut} />
+              )}
               <SettingsButton onClick={this.toggleSettings}>
                 {this.state.settingsOpen ? <CloseIcon /> : <SettingsIcon />}
               </SettingsButton>
